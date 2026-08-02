@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ng-green-900: #064E3B;
+  --color-ng-green-700: #047857;
+  --color-ng-green-500: #10B981;
+  --color-ng-green-300: #6EE7B7;
+  --color-ng-green-100: #D1FAE5;
+
+  --color-ng-amber-700: #B45309;
+  --color-ng-amber-500: #F59E0B;
+  --color-ng-amber-300: #FCD34D;
+  --color-ng-amber-100: #FEF3C7;
+
+  --font-display: "IBM Plex Sans", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* D3 tooltip — positioned absolutely via JS, not Tailwind */
+.d3-tooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 50;
+  background: #0F172A;
+  color: #F8FAFC;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+  max-width: 240px;
+}
+
+.d3-tooltip.visible {
+  opacity: 1;
+}
+
+.d3-tooltip .label {
+  color: #94A3B8;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.d3-tooltip .value {
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.d3-tooltip .delta {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.d3-tooltip .delta.positive { color: #6EE7B7; }
+.d3-tooltip .delta.negative { color: #FCA5A5; }
+
+/* Chart axis styling overrides — D3 generates these elements */
+.chart-axis .domain {
+  stroke: #E2E8F0;
+}
+
+.chart-axis .tick line {
+  stroke: #E2E8F0;
+}
+
+.chart-axis .tick text {
+  fill: #475569;
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+
+/* Grid lines */
+.chart-grid .tick line {
+  stroke: #E2E8F0;
+  stroke-dasharray: 2, 4;
+}
+
+.chart-grid .domain {
+  display: none;
+}
