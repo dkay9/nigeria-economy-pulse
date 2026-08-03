@@ -1,0 +1,11 @@
+import fs from 'fs';
+const g = JSON.parse(fs.readFileSync('./public/geo/nigeria-states.geojson', 'utf8'));
+const f = g.features[0];
+console.log('geometry type:', f.geometry.type);
+console.log('bbox present:', !!g.bbox);
+const c = f.geometry.coordinates.flat(Infinity);
+const lng = c.filter((_, i) => i % 2 === 0);
+const lat = c.filter((_, i) => i % 2 === 1);
+console.log('lng range:', Math.min(...lng).toFixed(2), 'to', Math.max(...lng).toFixed(2));
+console.log('lat range:', Math.min(...lat).toFixed(2), 'to', Math.max(...lat).toFixed(2));
+console.log('sample coord:', JSON.stringify(c.slice(0, 4)));

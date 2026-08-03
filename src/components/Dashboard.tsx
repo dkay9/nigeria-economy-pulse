@@ -11,6 +11,7 @@ import MetricCard from "./ui/MetricCard";
 import TimePeriodToggle from "./ui/TimePeriodToggle";
 import LineChart from "./charts/LineChart";
 import BarChart from "./charts/BarChart";
+import StateSection from "./charts/StateSection";
 import { COLORS } from "@/lib/d3-theme";
 import { filterByPeriod } from "@/lib/data-fetcher";
 
@@ -185,7 +186,7 @@ export default function Dashboard() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header */}
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] text-slate-900 tracking-tight">
+        <h1 className="text-2xl font-bold font-display text-slate-900 tracking-tight">
           Nigeria Economic Pulse
         </h1>
         <p className="text-sm text-slate-500">
@@ -204,7 +205,7 @@ export default function Dashboard() {
 
       {/* Period toggle — shared across line charts */}
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-slate-800">
+        <h2 className="text-lg font-semibold font-display text-slate-800">
           Trends
         </h2>
         <TimePeriodToggle selected={period} onChange={setPeriod} />
@@ -301,6 +302,14 @@ export default function Dashboard() {
           <SourceAttribution source={data.sectorBreakdown.source} />
         )}
       </section>
+
+      {/* State-Level Choropleth */}
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold font-display text-slate-800">
+          States
+        </h2>
+      </div>
+      <StateSection />
 
       {/* Footer */}
       <footer className="text-center text-xs text-slate-400 pt-4 border-t border-slate-100">
