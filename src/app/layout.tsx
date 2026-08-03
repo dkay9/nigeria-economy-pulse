@@ -26,7 +26,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-slate-50 text-slate-900 antialiased font-[family-name:var(--font-body)]">
+      <body className="bg-slate-50 text-slate-900 antialiased font-body">
         {children}
       </body>
     </html>
