@@ -1,9 +1,25 @@
+// =============================================================================
+// World Bank Indicators API Client
+// =============================================================================
+// Fetches macroeconomic data for Nigeria from the World Bank v2 API.
+//
+// API docs: https://datahelpdesk.worldbank.org/knowledgebase/articles/898581
+// No API key required. Returns JSON. Rate limits are generous.
+//
+// Response format (JSON):
+// [
+//   { page: 1, pages: 1, per_page: 500, total: 30, ... },  // metadata
+//   [ { indicator: {...}, country: {...}, date: "2023", value: 25.8 }, ... ]
+// ]
+// =============================================================================
+
 import type {
   IndicatorSeries,
   TimeSeriesPoint,
   DataSource,
   MetricSummary,
 } from "@/types/indicators";
+import { fetchWithTimeout } from "./fetch-utils";
 
 // ---------------------------------------------------------------------------
 // Indicator registry — maps our internal IDs to World Bank indicator codes
@@ -138,7 +154,11 @@ export async function fetchWorldBankIndicator(
     `${WB_BASE}/country/NGA/indicator/${wbCode}` +
     `?format=json&per_page=500&date=${startYear}:${currentYear}`;
 
-  const res = await fetch(url, { next: { revalidate: 86400 } }); // ISR: 24h
+  const res = await fetchWithTimeout(url, {
+    timeoutMs: 15000,
+    retries: 1,
+    init: { next: { revalidate: 86400 } }, // ISR: 24h
+  });
   if (!res.ok) {
     throw new Error(
       `World Bank API error: ${res.status} ${res.statusText} for ${wbCode}`

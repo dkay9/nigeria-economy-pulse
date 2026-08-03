@@ -47,7 +47,7 @@ export default function MetricCard({ metric }: MetricCardProps) {
       </span>
 
       <div className="flex items-baseline gap-2 mt-1">
-        <span className="text-2xl font-semibold font-[family-name:var(--font-display)] tabular-nums tracking-tight">
+        <span className="text-2xl font-semibold font-display tabular-nums tracking-tight">
           {formattedValue}
         </span>
 
